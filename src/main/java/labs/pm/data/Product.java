@@ -16,7 +16,7 @@ import static java.math.RoundingMode.HALF_UP;
  * Each product can have a discount calculated based on a
  * {@link DISCOUNT_RATE discount rate}.
  *
- * @author Fanon JUPKWO
+ * @author oracle
  * @version 4.0
  */
 
@@ -42,6 +42,39 @@ public class Product {
 	/** The price. */
 	private BigDecimal price;
 	
+	/** The rating. */
+	private Rating rating;
+	
+	public Product() {	
+		this(0,"no name",BigDecimal.ZERO);	
+	}
+	
+	/**
+	 * @param id
+	 * @param name
+	 * @param price
+	 * @param rating
+	 */
+	public Product(int id, String name, BigDecimal price, Rating rating) {
+		
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.rating = rating;
+	}
+	
+	
+
+	/**
+	 * @param id
+	 * @param name
+	 * @param price
+	 */
+	public Product(int id, String name, BigDecimal price) {
+		
+		this(id,name,price,Rating.NOT_RATED);
+	}
+	
 	/**
 	 * Gets the id.
 	 *
@@ -51,15 +84,7 @@ public class Product {
 		return id;
 	}
 	
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the id to set
-	 */
-	public void setId( final int id) {
-		this.id = id;
-	}
-	
+
 	/**
 	 * Gets the name.
 	 *
@@ -69,14 +94,6 @@ public class Product {
 		return name;
 	}
 	
-	/**
-	 * Sets the name.
-	 *
-	 * @param name the name to set
-	 */
-	public void setName( final String name) {
-		this.name = name;
-	}
 	
 	/**
 	 * Gets the price.
@@ -87,14 +104,6 @@ public class Product {
 		return price;
 	}
 	
-	/**
-	 * Sets the price.
-	 *
-	 * @param price the price to set
-	 */
-	public void setPrice( final BigDecimal price) {
-		this.price = price;
-	}
 	
 	/**
 	 * Calculates discount based on a product price and
@@ -108,6 +117,20 @@ public class Product {
 	{
 		return price.multiply(DISCOUNT_RATE).setScale(2, HALF_UP);
 	}
+
+	/**
+	 * @return the rating
+	 */
+	public Rating getRating() {
+		return rating;
+	}
+	
+	public Product applyRating(Rating newRating)
+	{
+		return new Product(id,name,price,newRating);
+	}
+	
+	
 	
 	
 
