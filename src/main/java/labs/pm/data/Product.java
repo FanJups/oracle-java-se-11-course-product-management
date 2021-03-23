@@ -24,7 +24,7 @@ import static java.math.RoundingMode.HALF_UP;
  */
 
 
-public abstract class Product {
+public abstract class Product implements Rateable<Product> {
 	
 	/**
 	 * A constant that defines a 
@@ -124,6 +124,7 @@ public abstract class Product {
 	/**
 	 * @return the rating
 	 */
+	@Override
 	public Rating getRating() {
 		return rating;
 	}
