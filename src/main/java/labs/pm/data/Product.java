@@ -4,6 +4,9 @@
 package labs.pm.data;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Objects;
+
 import static java.math.RoundingMode.HALF_UP;
 
 // TODO: Auto-generated Javadoc
@@ -21,7 +24,7 @@ import static java.math.RoundingMode.HALF_UP;
  */
 
 
-public class Product {
+public abstract class Product {
 	
 	/**
 	 * A constant that defines a 
@@ -45,7 +48,7 @@ public class Product {
 	/** The rating. */
 	private Rating rating;
 	
-	public Product() {	
+	 Product() {	
 		this(0,"no name",BigDecimal.ZERO);	
 	}
 	
@@ -55,7 +58,7 @@ public class Product {
 	 * @param price
 	 * @param rating
 	 */
-	public Product(int id, String name, BigDecimal price, Rating rating) {
+	 Product(int id, String name, BigDecimal price, Rating rating) {
 		
 		this.id = id;
 		this.name = name;
@@ -70,7 +73,7 @@ public class Product {
 	 * @param name
 	 * @param price
 	 */
-	public Product(int id, String name, BigDecimal price) {
+	 Product(int id, String name, BigDecimal price) {
 		
 		this(id,name,price,Rating.NOT_RATED);
 	}
@@ -125,13 +128,48 @@ public class Product {
 		return rating;
 	}
 	
-	public Product applyRating(Rating newRating)
-	{
-		return new Product(id,name,price,newRating);
+	public abstract Product applyRating(Rating newRating);
+	
+	/**
+	 * Get the value of the best before date for the product
+	 * 
+	 */
+	public LocalDate getBestBefore() {
+		return LocalDate.now();
 	}
 	
 	
-	
+
+	@Override
+	public String toString() {
+		return id + ", " + name + ", " + price + ", " + getDiscount() + ", " + rating.getStars()+ ", " + getBestBefore();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		
+		// obj !=null && getClass() == obj.getClass()
+		
+		if(obj instanceof Product) {
+			
+			final Product other = (Product) obj;
+			
+			return this.id == other.id && Objects.equals(this.name, other.name);
+		}
+		
+		return false;
+	}
+
 	
 
 }
