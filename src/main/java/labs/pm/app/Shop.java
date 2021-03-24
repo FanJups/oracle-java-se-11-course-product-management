@@ -5,6 +5,8 @@ package labs.pm.app;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Locale;
 
 import labs.pm.data.Drink;
@@ -42,6 +44,11 @@ public class Shop {
 		pm.printProductReport();
 		
 		p1 = pm.reviewProduct(p1, Rating.FOUR_STAR, "Nice hot cup of tea");
+		p1 = pm.reviewProduct(p1, Rating.TWO_STAR, "Rather weak tea");
+		p1 = pm.reviewProduct(p1, Rating.FOUR_STAR, "Good tea");
+		p1 = pm.reviewProduct(p1, Rating.FOUR_STAR, "Fine tea");
+		p1 = pm.reviewProduct(p1, Rating.FIVE_STAR, "Perfect tea");
+		p1 = pm.reviewProduct(p1, Rating.THREE_STAR, "Just add some lemon");
 		
 		pm.printProductReport();
 
@@ -65,6 +72,7 @@ public class Shop {
 		 * System.out.println(p7); System.out.println(p8); System.out.println(p9);
 		 * 
 		 */	
+		
 	
 	}
 
