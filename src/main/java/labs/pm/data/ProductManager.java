@@ -15,6 +15,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * @author oracle
@@ -97,16 +99,12 @@ public class ProductManager {
 		reviews.add(new Review(rating,comments));
 		
 		
-		int sum = 0;
+		product = product.applyRating(Rateable.convert((int)Math.round(reviews
+				.stream()
+				.mapToInt(r -> r.getRating().ordinal())
+				.average()
+				.orElse(0))));
 		
-		for(Review review : reviews)
-		{
-			sum += review.getRating().ordinal();
-		}
-		
-		
-		
-		product = product.applyRating(Rateable.convert(Math.round((float) sum / reviews.size())));
 		
 		products.put(product, reviews);
 		
@@ -116,19 +114,12 @@ public class ProductManager {
 	
 	public Product findProduct(int id)
 	{
-		Product  result =null;
 		
-		for(Product product : products.keySet())
-		{
-			if(product.getId() == id) {
-				
-				result = product;
-				break;
-			}
-			
-		}
-		
-		return result;
+		return products.keySet()
+				.stream()
+				.filter(p -> p.getId() == id)
+				.findFirst()
+				.orElseGet(() -> null) ;
 		
 	}
 	
@@ -149,44 +140,62 @@ public class ProductManager {
 		
 		Collections.sort(reviews);
 		
-		for(Review review : reviews) {
-			
+		/*
+		 * for(Review review : reviews) {
+		 * 
+		 * 
+		 * txt.append(formatter.formatReview(review));
+		 * 
+		 * txt.append("\n");
+		 * 
+		 * }
+		 * 
+		 */		
 		
-			txt.append(formatter.formatReview(review));
-			
-			txt.append("\n");
-			
-		}
-		
-		if(reviews.isEmpty())
-		{
-			txt.append(formatter.getText("no.reviews"));
-			
-			txt.append("\n");
+		  if(reviews.isEmpty()) { 
+			  
+		  txt.append(formatter.getText("no.reviews") + "\n");
+		  
+		  }else {
+			  
+			  
+			  txt.append(reviews.stream()
+					  .map(r -> formatter.formatReview(r) + "\n")
+					  .collect(Collectors.joining()));
+			  
+		  }
 
-		}
-				
 
 		System.out.println(txt);
 	}
 	
-	public void printProducts(Comparator<Product> sorter)
+	public void printProducts(Predicate<Product> filter, Comparator<Product> sorter)
 	{
-		List<Product> productList = new ArrayList<>(products.keySet());
-		
-		productList.sort(sorter);
 		
 		StringBuilder txt = new StringBuilder();
 		
-		for(Product product : productList)
-		{
-			txt.append(formatter.formatProduct(product));
-			
-			txt.append("\n");
-
-		}
+		txt.append(products.keySet()
+				.stream()
+				.sorted(sorter)
+				.filter(filter)
+				.map(p -> formatter.formatProduct(p) + "\n")
+				.collect(Collectors.joining()));
+		
 		
 		System.out.println(txt);
+	}
+	
+	public Map<String,String> getDiscounts()
+	{
+		return products.keySet()
+				.stream()
+				.collect(
+						Collectors.groupingBy(
+								product -> product.getRating().getStars(),
+						Collectors.collectingAndThen(
+								Collectors.summingDouble(
+										product -> product.getDiscount().doubleValue()), 
+								        discount -> formatter.moneyFormat.format(discount))));
 	}
 	
 	private static class ResourceFormatter
