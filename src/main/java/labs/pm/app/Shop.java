@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Locale;
+import java.util.function.Predicate;
 
 import labs.pm.data.Product;
 import labs.pm.data.ProductManager;
@@ -91,7 +92,7 @@ public class Shop {
 		  pm.reviewProduct(106, Rating.TWO_STAR, "Too bitter");
 		  pm.reviewProduct(106, Rating.ONE_STAR, "I don't get it!");
 		  
-		  //pm.printProductReport(106);
+		  pm.printProductReport(106);
 		  
 		  // Sort by rating descending order
 		  
@@ -101,13 +102,17 @@ public class Shop {
 		  
 		  Comparator<Product> priceSorter = (p1,p2) -> p2.getPrice().compareTo(p1.getPrice());
 		  
-		  pm.printProducts(ratingSorter);
+		  Predicate<Product> filter = p -> p.getPrice().floatValue() < 2;
 		  
-		  pm.printProducts(priceSorter);
+		  pm.printProducts(filter,ratingSorter);
 		  
-		  pm.printProducts(ratingSorter.thenComparing(priceSorter));
+		  //pm.printProducts(priceSorter);
 		  
-		  pm.printProducts(ratingSorter.thenComparing(priceSorter).reversed());
+		  //pm.printProducts(ratingSorter.thenComparing(priceSorter));
+		  
+		  //pm.printProducts(ratingSorter.thenComparing(priceSorter).reversed());
+		  
+		  pm.getDiscounts().forEach((rating,discount) -> System.out.println(rating+"\t"+discount));
 		 
 	
 	}
