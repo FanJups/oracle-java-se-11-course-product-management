@@ -9,6 +9,8 @@ import java.util.Objects;
 
 import static java.math.RoundingMode.HALF_UP;
 
+import java.io.Serializable;
+
 // TODO: Auto-generated Javadoc
 /**
  * {@code Product} class represents properties and behaviours of
@@ -24,7 +26,7 @@ import static java.math.RoundingMode.HALF_UP;
  */
 
 
-public abstract class Product implements Rateable<Product> {
+public abstract class Product implements Rateable<Product>,Serializable {
 	
 	/**
 	 * A constant that defines a 
