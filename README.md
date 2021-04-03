@@ -5,7 +5,9 @@ I'm preparing  Oracle Certified Professional JAVA SE 11 Developer so I'm followi
 
 This is a copy  based on my experience.
 
-The instructor used a linux OS and I used windows. 
+The instructor used a linux OS and NetBeans IDE. My setup is based on windows, Eclipse IDE and Maven as my build tool.
+
+We used different setups so I have to adapt.
 
 This situation forced me to make little changes on my code related to how windows manage paths.
 
