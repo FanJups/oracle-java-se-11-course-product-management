@@ -17,4 +17,7 @@ Secondly, the default locale of instructor's computer is english, mine is french
 
 You'll better understand what I mean by following the course and/or check code.
 
+RESEARCHES.md shows some links used to solve the problems I faced. One problem is how to manage jlink, the instructor used built-in jlink configuration on NetBeans and
+I used jlink maven plugin.
+
 Hope it helps!
