@@ -17,3 +17,5 @@ https://www.baeldung.com/jlink
 https://github.com/mhussainshah1/OCPStudyGuide
 
 https://www.youtube.com/channel/UCZC5KfHgb_nQVedKY0MMhLw
+
+https://education.oracle.com/java-se-11-developer/pexam_1Z0-819
