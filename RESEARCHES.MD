@@ -27,3 +27,13 @@ https://github.com/Techwaydotio/ocjp11-study-guide
 https://maven.apache.org/guides/mini/guide-multiple-modules.html
 
 https://www.baeldung.com/maven-multi-module-project-java-jpms
+
+# Understand Java Modules
+
+https://www.oracle.com/corporate/features/understanding-java-9-modules.html
+
+https://dzone.com/articles/java-9-module-services
+
+https://www.infoq.com/articles/java11-aware-service-module/#:~:text=A%20Java%20module%20is%20a%20self-contained%2C%20self-describing%20component,provider%20is%20a%20concrete%20implementation%20of%20a%20service.
+
+
