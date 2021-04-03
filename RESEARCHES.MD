@@ -11,3 +11,7 @@ https://github.com/apache/maven-jlink-plugin/
 # hw to set launcher for jlink
 
 https://www.baeldung.com/jlink
+
+# Useful Link to prepare OCP exam
+
+https://github.com/mhussainshah1/OCPStudyGuide
