@@ -15,3 +15,5 @@ https://www.baeldung.com/jlink
 # Useful Link to prepare OCP exam
 
 https://github.com/mhussainshah1/OCPStudyGuide
+
+https://www.youtube.com/channel/UCZC5KfHgb_nQVedKY0MMhLw
